@@ -1,5 +1,4 @@
 #include "PlaySceneActor.h"
-#include "Audio.h"
 #include "SceneManager.h"
 #include "ImageManager.h"
 #include "imgui.h"
@@ -13,8 +12,6 @@ void PlaySceneActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, Li
 	dxCommon->SetFullScreen(true);
 	//共通の初期化
 	BaseInitialize(dxCommon);
-	//オーディオ
-	Audio::GetInstance()->LoadSound(1, "Resources/Sound/BGM/Boss.wav");
 	//ポストエフェクトのファイル指定
 	postEffect->CreateGraphicsPipeline(L"Resources/Shaders/PostEffectTestVS.hlsl", L"Resources/Shaders/NewToneMapPS.hlsl");
 
@@ -47,10 +44,8 @@ void PlaySceneActor::Update(DirectXCommon* dxCommon, DebugCamera* camera, LightG
 	Input* input = Input::GetInstance();
 	if (input->TriggerButton(input->Button_A)) {
 		SceneManager::GetInstance()->ChangeScene("GAMECLEAR");
-		Audio::GetInstance()->StopWave(1);
 	}
 	//音楽の音量が変わる
-	Audio::GetInstance()->VolumChange(0, VolumManager::GetInstance()->GetBGMVolum());
 	camerawork->Update(camera);
 
 

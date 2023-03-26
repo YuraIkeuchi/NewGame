@@ -3,16 +3,11 @@
 #include <Easing.h>
 #include "ImageManager.h"
 #include "VariableCommon.h"
-#include "Audio.h"
 #include "VolumManager.h"
 //初期化
 void ClearSceneActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, LightGroup* lightgroup) {
 	//共通の初期化
 	BaseInitialize(dxCommon);
-
-	//オーディオ
-	Audio::GetInstance()->LoadSound(3, "Resources/Sound/BGM/jto3s-8fzcz.wav");
-	Audio::GetInstance()->LoopWave(3, VolumManager::GetInstance()->GetBGMVolum());
 
 	helper = make_unique< Helper>();
 
@@ -26,7 +21,6 @@ void ClearSceneActor::Update(DirectXCommon* dxCommon, DebugCamera* camera, Light
 	Input* input = Input::GetInstance();
 	if (input->TriggerButton(input->Button_X)) {
 		SceneManager::GetInstance()->ChangeScene("TITLE");
-		Audio::GetInstance()->StopWave(3);
 	}
 	lightgroup->Update();
 	//丸影

@@ -1,5 +1,4 @@
 #include "EditorSceneActor.h"
-#include "Audio.h"
 #include "SceneManager.h"
 #include "imgui.h"
 #include "VariableCommon.h"
@@ -25,8 +24,7 @@ void EditorSceneActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, 
 //XV
 void EditorSceneActor::Update(DirectXCommon* dxCommon, DebugCamera* camera, LightGroup* lightgroup)
 {
-	//‰¹Šy‚Ì‰¹—Ê‚ª•Ï‚í‚é
-	Audio::GetInstance()->VolumChange(0, VolumManager::GetInstance()->GetBGMVolum());
+
 }
 //•`‰æ
 void EditorSceneActor::Draw(DirectXCommon* dxCommon)
