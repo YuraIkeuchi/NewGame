@@ -7,6 +7,7 @@
 #include "imgui.h"
 #include "VariableCommon.h"
 #include "ParticleEmitter.h"
+#include "VolumManager.h"
 //‰Šú‰»
 void TitleSceneActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, LightGroup* lightgroup) {
 	//‹¤’Ê‚Ì‰Šú‰»

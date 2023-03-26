@@ -4,7 +4,7 @@
 #include "ImageManager.h"
 #include "VariableCommon.h"
 #include "Audio.h"
-
+#include "VolumManager.h"
 //‰Šú‰»
 void ClearSceneActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, LightGroup* lightgroup) {
 	//‹¤’Ê‚Ì‰Šú‰»

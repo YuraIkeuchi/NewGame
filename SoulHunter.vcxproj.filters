@@ -267,6 +267,9 @@
     <ClCompile Include="SourceCode\engine\camera\ShadowCamera.cpp">
       <Filter>SourceCords\engine\camera</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\gamesystem\player\Player.cpp">
+      <Filter>SourceCords\gamesystem\player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceCode\engine\enginebase\AbstractSceneFactory.h">
@@ -494,6 +497,9 @@
     <ClInclude Include="SourceCode\engine\camera\ShadowCamera.h">
       <Filter>SourceCords\engine\camera</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\gamesystem\player\Player.h">
+      <Filter>SourceCords\gamesystem\player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\Gaussian.hlsli">
@@ -650,6 +656,9 @@
     </Filter>
     <Filter Include="SourceCords\shader\2d\shadowmap">
       <UniqueIdentifier>{59d09cee-7718-4927-b90b-c23e9f233a60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCords\gamesystem\player">
+      <UniqueIdentifier>{fb4c4ceb-4762-483a-97ef-8226aeacba69}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,9 +1,8 @@
 #pragma once
 #include "BaseActor.h"
 #include "IKESprite.h"
-#include "IKEObject3d.h"
 #include "IKEModel.h"
-
+#include "Player.h"
 /// タイトルシーン
 class PlaySceneActor : public BaseActor {
 public:
@@ -34,4 +33,5 @@ private:
 	unique_ptr<IKEObject3d> objCube;
 	IKEModel* modelGround = nullptr;
 	IKEModel* modelCube = nullptr;
+	unique_ptr<Player> player;
 };

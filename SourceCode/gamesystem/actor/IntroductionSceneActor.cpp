@@ -5,6 +5,7 @@
 #include "ImageManager.h"
 #include "VariableCommon.h"
 #include "imgui.h"
+#include "VolumManager.h"
 //‰Šú‰»
 void IntroductionSceneActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, LightGroup* lightgroup) {
 	//‹¤’Ê‚Ì‰Šú‰»

@@ -11,6 +11,7 @@ ModelManager* ModelManager::GetInstance() {
 void ModelManager::StartInitialize() {
 	LoadModel(Ground, "ground");
 	LoadModel(Cube, "cube");
+	LoadModel(Player, "chr_knight");
 }
 //ƒ‚ƒfƒ‹“Ç‚İ‚İ
 void ModelManager::SecondInitialize() {
