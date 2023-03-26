@@ -76,3 +76,10 @@ void ObjCommon::Fbx_Draw(DirectXCommon* dxCommon)
 	m_fbxObject->Draw(dxCommon->GetCmdList());
 }
 
+
+XMFLOAT3 ObjCommon::MoveVECTOR(XMVECTOR v, float angle) {
+	XMMATRIX rot = XMMatrixRotationY(XMConvertToRadians(angle));
+	v = XMVector3TransformNormal(v, rot);
+	XMFLOAT3 pos = { v.m128_f32[0],v.m128_f32[1] ,v.m128_f32[2] };
+	return pos;
+}

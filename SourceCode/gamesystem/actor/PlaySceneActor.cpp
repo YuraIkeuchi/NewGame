@@ -119,6 +119,7 @@ void PlaySceneActor::FrontDraw(DirectXCommon* dxCommon) {
 //IMGui‚Ì•`‰æ
 void PlaySceneActor::ImGuiDraw(DirectXCommon* dxCommon) {
 	camerawork->ImGuiDraw();
+	player->ImGuiDraw();
 }
 //•’Ê‚Ì•`‰æ
 void PlaySceneActor::NormalDraw(DirectXCommon* dxCommon) {

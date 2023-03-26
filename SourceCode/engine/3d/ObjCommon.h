@@ -4,6 +4,7 @@
 #include"IKEFBXObject3d.h"
 #include"IKEFBXModel.h"
 #include "DirectXCommon.h"
+#include <DirectXMath.h>
 #include"ModelManager.h"
 #include<memory>
 using namespace std;         //  名前空間指定
@@ -38,6 +39,8 @@ public:
 
 	virtual void Draw(DirectXCommon* dxCommon) = 0;
 
+	//ベクター変換
+	XMFLOAT3 MoveVECTOR(XMVECTOR v, float angle);
 public:
 	//gettersetter
 	const XMFLOAT3& GetPosition() { return m_Position; }
