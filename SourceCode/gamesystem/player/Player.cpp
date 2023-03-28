@@ -55,6 +55,11 @@ void Player::Update() {
 				m_Move = false;
 			}
 		}
+
+		if (m_Position.x > 10.0f || m_Position.x < -10.0f) {
+			m_Velocity *= -1;
+			m_Veltype *= -1;
+		}
 	}
 	////ã
 	//if (input->LeftTiltStick(input->Up)) {
@@ -90,6 +95,7 @@ void Player::ImGuiDraw() {
 	ImGui::Begin("Player");
 	ImGui::Text("Move:%d",m_Move);
 	ImGui::Text("VelType:%d", m_Veltype);
+	ImGui::Text("Position.x:%f", m_Position.x);
 	ImGui::SliderFloat("Velocity", &m_Velocity, -3.0f, 3.0f);
 	ImGui::End();
 }

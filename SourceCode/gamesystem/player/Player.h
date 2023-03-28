@@ -44,9 +44,9 @@ private:
 	bool m_Move = false;
 
 	enum VelType {
-		Adove,//0à»è„
-		Below,//0à»â∫
+		Adove = 1,//0à»è„
+		Below = -1,//0à»â∫
 	};
 
-	VelType m_Veltype = Adove;
+	int m_Veltype = Adove;
 };
