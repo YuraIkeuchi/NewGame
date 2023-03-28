@@ -26,28 +26,56 @@ void Player::Update() {
 	Input* input = Input::GetInstance();
 	m_StickrotX = input->GetPosX();
 	m_StickrotY = input->GetPosY();
-	const float STICK_MAX = 32767.0f;
+	const float STICK_MAX = 1000.0f;
 	//移動
-	//上
-	if (input->LeftTiltStick(input->Up)) {
-		XMFLOAT3 vecvel = MoveVECTOR(XMVECTOR{ 0,0,m_Velocity,0 }, m_Angle);
-		m_Position.z -= vecvel.z * (m_StickrotY / STICK_MAX);
+	if (input->TriggerButton(input->Button_X) && (!m_Move)) {
+		m_Move = true;
+		if (m_Velocity > m_ResetFew) {
+			m_Veltype = Adove;
+		}
+		else {
+			m_Veltype = Below;
+		}
 	}
-	//下
-	if (input->LeftTiltStick(input->Down)) {
-		XMFLOAT3 vecvel = MoveVECTOR(XMVECTOR{ 0,0,-m_Velocity,0 }, m_Angle);
-		m_Position.z += vecvel.z * (m_StickrotY / STICK_MAX);
+
+	if (m_Move) {
+		m_Position.x += m_Velocity;
+
+		m_Velocity *= m_damp1;//徐々に速度を落とす
+		//移動力がなくなったら動かせる
+		if (m_Veltype == Adove) {
+			if (m_Velocity < 0.1f) {
+				m_Velocity = m_ResetFew;
+				m_Move = false;
+			}
+		}
+		else {
+			if (m_Velocity > -0.1f) {
+				m_Velocity = m_ResetFew;
+				m_Move = false;
+			}
+		}
 	}
-	//右
-	if (input->LeftTiltStick(input->Right)) {
-		XMFLOAT3 vecvel = MoveVECTOR(XMVECTOR{ m_Velocity,0,0,0 }, m_Angle);
-		m_Position.x += vecvel.x * (m_StickrotX / STICK_MAX);
-	}
-	//左
-	if (input->LeftTiltStick(input->Left)) {
-		XMFLOAT3 vecvel = MoveVECTOR(XMVECTOR{ -m_Velocity,0,0,0 }, m_Angle);
-		m_Position.x -= vecvel.x * (m_StickrotX / STICK_MAX);
-	}
+	////上
+	//if (input->LeftTiltStick(input->Up)) {
+	//	XMFLOAT3 vecvel = MoveVECTOR(XMVECTOR{ 0,0,m_Velocity,0 }, m_Angle);
+	//	m_Position.z -= vecvel.z * (m_StickrotY / STICK_MAX);
+	//}
+	////下
+	//if (input->LeftTiltStick(input->Down)) {
+	//	XMFLOAT3 vecvel = MoveVECTOR(XMVECTOR{ 0,0,-m_Velocity,0 }, m_Angle);
+	//	m_Position.z += vecvel.z * (m_StickrotY / STICK_MAX);
+	//}
+	////右
+	//if (input->LeftTiltStick(input->Right)) {
+	//	XMFLOAT3 vecvel = MoveVECTOR(XMVECTOR{ m_Velocity,0,0,0 }, m_Angle);
+	//	m_Position.x += vecvel.x * (m_StickrotX / STICK_MAX);
+	//}
+	////左
+	//if (input->LeftTiltStick(input->Left)) {
+	//	XMFLOAT3 vecvel = MoveVECTOR(XMVECTOR{ -m_Velocity,0,0,0 }, m_Angle);
+	//	m_Position.x -= vecvel.x * (m_StickrotX / STICK_MAX);
+	//}
 
 	m_Rotation.y = m_Angle - (atan2f(m_StickrotX / STICK_MAX, m_StickrotY / STICK_MAX) * (180.0f / XM_PI));
 	Obj_SetParam();
@@ -60,10 +88,8 @@ void Player::Draw(DirectXCommon* dxCommon) {
 
 void Player::ImGuiDraw() {
 	ImGui::Begin("Player");
-	ImGui::Text("X:%f", m_StickrotX);
-	ImGui::Text("Y:%f", m_StickrotY);
-	ImGui::Text("PosX:%f", m_Position.x);
-	ImGui::Text("PosZ:%f", m_Position.z);
-	ImGui::Text("RotY:%f", m_Rotation.y);
+	ImGui::Text("Move:%d",m_Move);
+	ImGui::Text("VelType:%d", m_Veltype);
+	ImGui::SliderFloat("Velocity", &m_Velocity, -3.0f, 3.0f);
 	ImGui::End();
 }

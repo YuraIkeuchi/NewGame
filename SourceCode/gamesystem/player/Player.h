@@ -36,7 +36,17 @@ private:
 	const float XM_PI = 3.141592654f;
 	//ƒƒ“ƒoŠÖ”
 	float m_Angle = 0.0f;
-	float m_Velocity = 1.5f;
+	float m_Velocity = 2.0f;
 	float m_StickrotX = 0.0f;
 	float m_StickrotY = 0.0f;
+	//–€C‚É‚æ‚éŒ¸Š
+	float m_damp1 = 0.95f;
+	bool m_Move = false;
+
+	enum VelType {
+		Adove,//0ˆÈã
+		Below,//0ˆÈ‰º
+	};
+
+	VelType m_Veltype = Adove;
 };
