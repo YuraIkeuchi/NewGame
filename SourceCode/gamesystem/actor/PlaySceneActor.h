@@ -34,4 +34,5 @@ private:
 	IKEModel* modelGround = nullptr;
 	IKEModel* modelCube = nullptr;
 	unique_ptr<Player> player;
+	std::vector<std::vector<int>> map; //マップチップ(1マップ)
 };

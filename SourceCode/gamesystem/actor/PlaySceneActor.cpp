@@ -6,6 +6,7 @@
 #include "ParticleEmitter.h"
 #include "ModelManager.h"
 #include "VolumManager.h"
+#include "Block.h"
 //初期化
 void PlaySceneActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, LightGroup* lightgroup)
 {
@@ -33,10 +34,13 @@ void PlaySceneActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, Li
 	objGround = make_unique<IKEObject3d>();
 	objGround->Initialize();
 	objGround->SetModel(modelGround);
-	objGround->SetPosition({ 0.0f,0.0f,0.0f });
+	objGround->SetPosition({ 0.0f,-10.0f,0.0f });
 
 	player = make_unique< Player>();
 	player->Initialize();
+
+	Block::GetInstance()->ModelInit();
+	Block::GetInstance()->Initialize(map, 0, 0);
 }
 //更新
 void PlaySceneActor::Update(DirectXCommon* dxCommon, DebugCamera* camera, LightGroup* lightgroup)
@@ -53,6 +57,7 @@ void PlaySceneActor::Update(DirectXCommon* dxCommon, DebugCamera* camera, LightG
 	objGround->Update();
 	player->Update();
 	lightgroup->Update();
+	Block::GetInstance()->Update();
 }
 //普通の更新
 void PlaySceneActor::NormalUpdate() {
@@ -101,6 +106,7 @@ void PlaySceneActor::ModelDraw(DirectXCommon* dxCommon) {
 	player->Draw(dxCommon);
 	//objCube->Draw();
 	objGround->Draw();
+	Block::GetInstance()->Draw();
 	IKEObject3d::PostDraw();
 }
 //後ろの描画
