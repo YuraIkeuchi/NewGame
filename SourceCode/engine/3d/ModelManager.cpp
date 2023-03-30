@@ -12,6 +12,7 @@ void ModelManager::StartInitialize() {
 	LoadModel(Ground, "ground");
 	LoadModel(Cube, "cube");
 	LoadModel(Player, "chr_knight");
+	LoadModel(Block, "box1x1x1");
 }
 //ƒ‚ƒfƒ‹“Ç‚İ‚İ
 void ModelManager::SecondInitialize() {

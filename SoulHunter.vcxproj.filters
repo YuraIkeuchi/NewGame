@@ -270,6 +270,12 @@
     <ClCompile Include="SourceCode\gamesystem\player\Player.cpp">
       <Filter>SourceCords\gamesystem\player</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\gamesystem\mapchip\Block.cpp">
+      <Filter>SourceCords\gamesystem\mapchip</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\gamesystem\mapchip\MapChip.cpp">
+      <Filter>SourceCords\gamesystem\mapchip</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SourceCode\engine\enginebase\AbstractSceneFactory.h">
@@ -500,6 +506,12 @@
     <ClInclude Include="SourceCode\gamesystem\player\Player.h">
       <Filter>SourceCords\gamesystem\player</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\gamesystem\mapchip\Block.h">
+      <Filter>SourceCords\gamesystem\mapchip</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\gamesystem\mapchip\MapChip.h">
+      <Filter>SourceCords\gamesystem\mapchip</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\Gaussian.hlsli">
@@ -659,6 +671,9 @@
     </Filter>
     <Filter Include="SourceCords\gamesystem\player">
       <UniqueIdentifier>{fb4c4ceb-4762-483a-97ef-8226aeacba69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceCords\gamesystem\mapchip">
+      <UniqueIdentifier>{29a4c7bb-41e0-4982-8540-6ba859d98f93}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

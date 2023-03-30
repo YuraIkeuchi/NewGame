@@ -1,7 +1,9 @@
 #pragma once
 #include "DirectXCommon.h"
 #include "ObjCommon.h"
-
+#include <Windows.h>
+#include <d3d12.h>
+#include <DirectXMath.h>
 using namespace std;         //  –¼‘O‹óŠÔw’è
 
 class Player :
@@ -25,9 +27,26 @@ public:
 	/// •`‰æ
 	/// </summary>
 	void Draw(DirectXCommon* dxCommon) override;
+
+	void ImGuiDraw();
 	
 public:
 	//getter
 private:
+	const float XM_PI = 3.141592654f;
 	//ƒƒ“ƒoŠÖ”
+	float m_Angle = 0.0f;
+	float m_Velocity = 2.0f;
+	float m_StickrotX = 0.0f;
+	float m_StickrotY = 0.0f;
+	//–€C‚É‚æ‚éŒ¸Š
+	float m_damp1 = 0.95f;
+	bool m_Move = false;
+
+	enum VelType {
+		Adove = 1,//0ˆÈã
+		Below = -1,//0ˆÈ‰º
+	};
+
+	int m_Veltype = Adove;
 };

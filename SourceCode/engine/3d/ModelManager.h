@@ -17,6 +17,7 @@ public:
 		Ground,
 		Cube,
 		Player,
+		Block
 	};
 	//FBX‚Ì–¼‘O
 	enum FBXName {

@@ -1,5 +1,4 @@
 #include "TitleSceneActor.h"
-#include "Audio.h"
 #include "input.h"
 #include "SceneManager.h"
 #include <Easing.h>
@@ -14,10 +13,6 @@ void TitleSceneActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, L
 	BaseInitialize(dxCommon);
 	dxCommon->SetFullScreen(true);
 
-	//オーディオ
-	Audio::GetInstance()->LoadSound(0, "Resources/Sound/BGM/ruinsBGM.wav");
-	Audio::GetInstance()->LoopWave(0, VolumManager::GetInstance()->GetBGMVolum());
-
 	helper = make_unique< Helper>();
 
 	//タイトル
@@ -30,7 +25,6 @@ void TitleSceneActor::Update(DirectXCommon* dxCommon, DebugCamera* camera, Light
 	Input* input = Input::GetInstance();
 	if (input->TriggerButton(input->Button_B)) {
 		SceneManager::GetInstance()->ChangeScene("FIRSTSTAGE");
-		Audio::GetInstance()->StopWave(0);
 	}
 	lightgroup->Update();
 	ParticleEmitter::GetInstance()->FireEffect(100, { 0.0f,23.0f,0.0f }, 5.0f, 0.0f, { 1.0f,0.5f,0.0f,0.5f }, { 1.0f,0.5f,0.0f,0.5f });

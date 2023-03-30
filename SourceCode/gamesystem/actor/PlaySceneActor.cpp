@@ -1,5 +1,4 @@
 #include "PlaySceneActor.h"
-#include "Audio.h"
 #include "SceneManager.h"
 #include "ImageManager.h"
 #include "imgui.h"
@@ -7,14 +6,13 @@
 #include "ParticleEmitter.h"
 #include "ModelManager.h"
 #include "VolumManager.h"
+#include "Block.h"
 //初期化
 void PlaySceneActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, LightGroup* lightgroup)
 {
 	dxCommon->SetFullScreen(true);
 	//共通の初期化
 	BaseInitialize(dxCommon);
-	//オーディオ
-	Audio::GetInstance()->LoadSound(1, "Resources/Sound/BGM/Boss.wav");
 	//ポストエフェクトのファイル指定
 	postEffect->CreateGraphicsPipeline(L"Resources/Shaders/PostEffectTestVS.hlsl", L"Resources/Shaders/NewToneMapPS.hlsl");
 
@@ -36,10 +34,13 @@ void PlaySceneActor::Initialize(DirectXCommon* dxCommon, DebugCamera* camera, Li
 	objGround = make_unique<IKEObject3d>();
 	objGround->Initialize();
 	objGround->SetModel(modelGround);
-	objGround->SetPosition({ 0.0f,0.0f,0.0f });
+	objGround->SetPosition({ 0.0f,-10.0f,0.0f });
 
 	player = make_unique< Player>();
 	player->Initialize();
+
+	Block::GetInstance()->ModelInit();
+	Block::GetInstance()->Initialize(map, 0, 0);
 }
 //更新
 void PlaySceneActor::Update(DirectXCommon* dxCommon, DebugCamera* camera, LightGroup* lightgroup)
@@ -47,10 +48,8 @@ void PlaySceneActor::Update(DirectXCommon* dxCommon, DebugCamera* camera, LightG
 	Input* input = Input::GetInstance();
 	if (input->TriggerButton(input->Button_A)) {
 		SceneManager::GetInstance()->ChangeScene("GAMECLEAR");
-		Audio::GetInstance()->StopWave(1);
 	}
 	//音楽の音量が変わる
-	Audio::GetInstance()->VolumChange(0, VolumManager::GetInstance()->GetBGMVolum());
 	camerawork->Update(camera);
 
 
@@ -58,6 +57,7 @@ void PlaySceneActor::Update(DirectXCommon* dxCommon, DebugCamera* camera, LightG
 	objGround->Update();
 	player->Update();
 	lightgroup->Update();
+	Block::GetInstance()->Update();
 }
 //普通の更新
 void PlaySceneActor::NormalUpdate() {
@@ -106,6 +106,7 @@ void PlaySceneActor::ModelDraw(DirectXCommon* dxCommon) {
 	player->Draw(dxCommon);
 	//objCube->Draw();
 	objGround->Draw();
+	Block::GetInstance()->Draw();
 	IKEObject3d::PostDraw();
 }
 //後ろの描画
@@ -124,6 +125,7 @@ void PlaySceneActor::FrontDraw(DirectXCommon* dxCommon) {
 //IMGuiの描画
 void PlaySceneActor::ImGuiDraw(DirectXCommon* dxCommon) {
 	camerawork->ImGuiDraw();
+	player->ImGuiDraw();
 }
 //普通の描画
 void PlaySceneActor::NormalDraw(DirectXCommon* dxCommon) {

@@ -1,8 +1,6 @@
 #include "IntroductionSceneActor.h"
-#include "Audio.h"
 #include "SceneManager.h"
 #include <Easing.h>
-#include "ImageManager.h"
 #include "VariableCommon.h"
 #include "imgui.h"
 #include "VolumManager.h"
@@ -20,10 +18,6 @@ void IntroductionSceneActor::Initialize(DirectXCommon* dxCommon, DebugCamera* ca
 
 	//ポストエフェクトのファイル指定
 	postEffect->CreateGraphicsPipeline(L"Resources/Shaders/PostEffectTestVS.hlsl", L"Resources/Shaders/SepiaPS.hlsl");
-
-	//オーディオ
-	Audio::GetInstance()->LoadSound(2, "Resources/Sound/BGM/8bo8k-1eq6w.wav");
-	Audio::GetInstance()->LoopWave(2, VolumManager::GetInstance()->GetBGMVolum());
 
 	helper = make_unique< Helper>();
 }
