@@ -3,8 +3,8 @@
 #include <Easing.h>
 #include  "imgui.h"
 CameraWork::CameraWork() {
-	m_eyePos = { 0.0f,70.0f,-2.0f };
-	m_targetPos = { 0.0f,0.0f,0.0f };
+	m_eyePos = { 10.0f,70.0f,-10.0f };
+	m_targetPos = { 10.0f,0.0f,-8.0f };
 	
 	Shake* shake_ = new Shake();
 	shake.reset(shake_);

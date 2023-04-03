@@ -25,6 +25,10 @@ public:
 	//マップチップ生成
 	void MapCreate(int mapNumber,int StageNumber);
 
+	//マップチップ当たり判定(プレイヤー)
+	bool PlayerMapCollideCommon(XMFLOAT3 pos, XMFLOAT2 radius,
+		const XMFLOAT3 old_pos,XMFLOAT3& velocity);
+
 private:
 	//マップチップ1つの大きさ
 	const float LAND_SCALE = 5.0f;

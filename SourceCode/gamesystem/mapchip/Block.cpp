@@ -77,6 +77,83 @@ void Block::MapCreate(int mapNumber, int StageNumber)
 	}
 }
 
+//プレイヤーとブロック当たり判定
+bool Block::PlayerMapCollideCommon(XMFLOAT3 pos, XMFLOAT2 radius,
+	const XMFLOAT3 old_pos,XMFLOAT3& velocity)
+{
+
+	//マップチップ
+	//X, Y
+	float l_MapPosX = 0.0f;
+	float l_MapPosZ = 0.0f;
+	//Radius
+	float l_RadiusX = 2.0f;
+	float l_RadiusZ = 2.0f;
+
+	//フラグ
+	bool l_IsHit = false;
+
+	//判定
+	int l_MapMaxX = static_cast<int>((pos.x + radius.x + LAND_SCALE / 2) / LAND_SCALE);
+	int l_MapMinX = static_cast<int>((pos.x - radius.x + LAND_SCALE / 2) / LAND_SCALE);
+	int l_MapMaxZ = -static_cast<int>((pos.z - radius.y + LAND_SCALE / 2) / LAND_SCALE - 1);
+	int l_MapMinZ = -static_cast<int>((pos.z + radius.y + LAND_SCALE / 2) / LAND_SCALE - 1);
+
+	for (int h = l_MapMinZ; h <= l_MapMaxZ; h++)
+	{
+		if (h < 0)
+		{
+			continue;
+		}
+		for (int w = l_MapMinX; w <= l_MapMaxX; w++)
+		{
+			if (w < 0)
+			{
+				continue;
+			}
+
+			if (MapChip::GetChipNum(w, h, stagemap[0]) == 1)
+			{
+				l_MapPosX = objNormalBlock[h][w]->GetPosition().x;
+				l_MapPosZ = objNormalBlock[h][w]->GetPosition().z;
+
+				if (pos.x <= l_MapPosX + l_RadiusX && l_MapPosX - l_RadiusX <= pos.x)
+				{
+					//下の当たり判定
+					if (l_MapPosZ + l_RadiusZ + radius.y > pos.z && l_MapPosZ < old_pos.z)
+					{
+						l_IsHit = true;
+						velocity.z *= -1;
+					}
+					//上の当たり判定
+					else if (l_MapPosZ - l_RadiusZ - radius.y < pos.z && l_MapPosZ > old_pos.z)
+					{
+						l_IsHit = true;
+						velocity.z *= -1;
+					}
+				}
+				if (pos.z <= l_MapPosZ + l_RadiusZ && l_MapPosZ - l_RadiusZ <= pos.z)
+				{
+					//左の当たり判定
+					if (l_MapPosX + l_RadiusX + radius.x > pos.x && l_MapPosX < old_pos.x)
+					{
+						l_IsHit = true;
+						velocity.x *= -1;
+					}
+					//右の当たり判定
+					if (l_MapPosX - l_RadiusX - radius.x < pos.x && l_MapPosX > old_pos.x)
+					{
+						l_IsHit = true;
+						velocity.x *= -1;
+					}
+				}
+
+			}
+		}
+	}
+	return l_IsHit;
+}
+
 //マップチップの初期化
 void Block::ResetBlock() {
 	for (int y = 0; y < map_max_y; y++)
